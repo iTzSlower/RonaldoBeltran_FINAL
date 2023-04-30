@@ -8,6 +8,7 @@ urlpatterns = [
     
     path("", inicioApp, name="inicioApp"),
     #path("crear_curso/", crear_curso),
+    
     path("cursos/", cursos, name="cursos"),
     path("profesores/", profesores, name="profesores"),
     path("estudiantes/", estudiantes, name="estudiantes"),
@@ -37,7 +38,7 @@ urlpatterns = [
     path('entregable/editar/<pk>', EntregableUpdate.as_view(), name='entregable_editar'),
     path('entregable/borrar/<pk>', EntregableDelete.as_view(), name='entregable_borrar'),
 
-
+    path("route_about/", route_about, name="route_about"),
     path("login/", login_request, name="login"),
     path("register/", register, name="register"),
     path('logout/', LogoutView.as_view(), name='logout'),

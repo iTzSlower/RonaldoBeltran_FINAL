@@ -188,6 +188,9 @@ class EstudianteUpdate(LoginRequiredMixin, UpdateView):#vista usada para EDITAR
 
 
 
+#route_about
+def route_about(request):
+    return render(request, "AppCoder/route_about.html")
 
 #login logout register
 
