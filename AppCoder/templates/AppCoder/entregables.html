@@ -2,13 +2,33 @@
 
 {% load static %}
 
-
 {% block titulo %}
-    <h1>Bienvenidos a la pagina de ENTREGABLES!</h1>
+<h1 class="mb-5">ESTE TITULO VIENE DE ENTREGABLES</h1>
 {% endblock %}
 
 {% block contenido_que_cambia %}
+<h2>LISTADO DE ENTREGABLES</h2>
 
-<h1> Hola ENTREGABLES</h1>
+<img src="/media/Image/book.png" alt="" width="100" height="100">
+
+<h2> <br> </h2>
+<ul>
+
+    {% for entregable in object_list %}
+    <li>
+        {{ entregable }}
+        <img src="/media/Image/book.png" alt="" width="20" height="20">
+        
+    </li>
+    
+    <a class="btn btn-danger" href="{% url 'entregable_borrar' entregable.id %}">Borrar</a>
+    <a class="btn btn-success" href="{% url 'entregable_editar' entregable.id %}">Editar</a>
+    <br>
+    {% endfor %}
+    <br>
+    <br>
+    <a class="btn btn-primary" href="{% url 'entregable_crear'  %}">AGREGAR ENTREGABLE</a>
+</ul>
+<h3>{{ mensaje }}</h3>
 
 {% endblock %}

@@ -3,15 +3,15 @@
 {% load static %}
 
 {% block titulo %}
-<h1 class="mb-5">FORMULARIO DE ESTUDIANTES</h1>
+<h1 class="mb-5">FORMULARIO DE ENTREGABLES</h1>
 {% endblock %}
 
 {% block contenido_que_cambia %}
-<h1>FORMULARIO DE ESTUDIANTES!</h1>
+<h1>FORMULARIO DE ENTREGABLES!</h1>
 
 
 <form method="post">{% csrf_token %}
-    estas seguro que deseas borrar el estudiante "{{ object }}"?
+    estas seguro que deseas borrar el entregable "{{ object }}"?
     <input type="submit" value="SI">
 
 </form>

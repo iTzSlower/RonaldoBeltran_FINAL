@@ -2,8 +2,9 @@
 
 {% load static %}
 
+
 {% block titulo %}
-<h1 class="mb-5">FORMULARIO DE ESTUDIANTES</h1>
+    <h1>Bienvenidos a la pagina de CURSOS!</h1>
 {% endblock %}
 
 {% block contenido_que_cambia %}
@@ -11,7 +12,7 @@
 
 
 <form method="post">{% csrf_token %}
-    estas seguro que deseas borrar el estudiante "{{ object }}"?
+    estas seguro que deseas borrar el curso "{{ object }}"?
     <input type="submit" value="SI">
 
 </form>

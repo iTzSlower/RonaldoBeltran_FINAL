@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Curso, Profesor, Estudiante, Avatar
+from .models import Curso, Profesor, Estudiante, Avatar, Entregable
 from .forms import ProfesorForm, RegistroUsuarioForm, UserEditForm, AvatarForm
 from django.http import HttpResponse
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
@@ -11,24 +11,6 @@ from django.contrib.auth import login, authenticate
 
 from django.contrib.auth.decorators import login_required #para vistas basadas en funciones DEF  
 from django.contrib.auth.mixins import LoginRequiredMixin #para vistas basadas en clases CLASS   
-
-# Create your views here.
-
-def crear_curso(request):
-
-    nombre_curso="Programacion"
-    comision_curso=10010
-    print("Creando curso")
-    curso=Curso(nombre=nombre_curso, comision=comision_curso)
-    curso.save()
-    respuesta=f"Curso creado--- {nombre_curso} - {comision_curso}"
-    return HttpResponse(respuesta)
-
-    
-def cursos(request):
-    
-    return render(request, "AppCoder/cursos.html")
-
 
 @login_required
 def profesores(request):
@@ -113,6 +95,11 @@ def editarProfesor(request, id):
 def estudiantes(request):
     return render(request, "AppCoder/estudiantes.html")
 
+@login_required
+def cursos(request):
+    return render(request, "AppCoder/cursos.html")
+
+
 def entregables(request):
     return render(request, "AppCoder/entregables.html")
 
@@ -124,6 +111,54 @@ def inicioApp(request):
 
     return render(request, "AppCoder/inicio.html", {"avatar":obtenerAvatar(request)})
 
+
+# CURSOS
+
+class CursoList(LoginRequiredMixin, ListView):
+    model= Curso
+    template_name= "AppCoder/curso.html"
+
+class CursoCreacion(LoginRequiredMixin, CreateView):
+    model= Curso
+    success_url= reverse_lazy("curso_list")
+    fields=['nombre', 'comision']
+
+class CursoDetalle(LoginRequiredMixin, DetailView):
+    model= Curso
+    template_name="Appcoder/curso_detalle.html"
+
+class CursoDelete(LoginRequiredMixin, DeleteView):
+    model= Curso
+    success_url= reverse_lazy("curso_list")
+
+class CursoUpdate(LoginRequiredMixin, UpdateView):
+    model = Curso
+    success_url = reverse_lazy('curso_list')
+    fields=['nombre', 'comision']
+
+# ENTREGABLE
+
+class EntregableList(LoginRequiredMixin, ListView):
+    model= Entregable
+    template_name= "AppCoder/entregables.html"
+
+class EntregableCreacion(LoginRequiredMixin, CreateView):
+    model= Entregable
+    success_url= reverse_lazy("entregable_list")
+    fields=['nombre', 'fecha_entrega', 'entregado']
+
+class EntregableDetalle(LoginRequiredMixin, DetailView):
+    model= Entregable
+    template_name="Appcoder/entregable_detalle.html"
+
+class EntregableDelete(LoginRequiredMixin, DeleteView):
+    model= Entregable
+    success_url= reverse_lazy("entregable_list")
+
+class EntregableUpdate(LoginRequiredMixin, UpdateView):
+    model = Entregable
+    success_url = reverse_lazy('entregable_list')
+    fields=['nombre', 'fecha_entrega', 'entregado']
 
 # vistas basadas en clases:
 
@@ -148,6 +183,10 @@ class EstudianteUpdate(LoginRequiredMixin, UpdateView):#vista usada para EDITAR
     model = Estudiante
     success_url = reverse_lazy('estudiante_list')
     fields=['nombre', 'apellido', 'email']
+
+
+
+
 
 
 #login logout register

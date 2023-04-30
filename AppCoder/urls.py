@@ -7,7 +7,7 @@ from django.contrib.auth.views import LogoutView
 urlpatterns = [
     
     path("", inicioApp, name="inicioApp"),
-    path("crear_curso/", crear_curso),
+    #path("crear_curso/", crear_curso),
     path("cursos/", cursos, name="cursos"),
     path("profesores/", profesores, name="profesores"),
     path("estudiantes/", estudiantes, name="estudiantes"),
@@ -24,6 +24,18 @@ urlpatterns = [
     path('estudiante/<pk>', EstudianteDetalle.as_view(), name='estudiante_detalle'),
     path('estudiante/editar/<pk>', EstudianteUpdate.as_view(), name='estudiante_editar'),
     path('estudiante/borrar/<pk>', EstudianteDelete.as_view(), name='estudiante_borrar'),
+
+    path("curso/list/", CursoList.as_view(), name="curso_list"),
+    path('curso/nuevo/', CursoCreacion.as_view(), name='curso_crear'),
+    path('curso/<pk>', CursoDetalle.as_view(), name='curso_detalle'),
+    path('curso/editar/<pk>', CursoUpdate.as_view(), name='curso_editar'),
+    path('curso/borrar/<pk>', CursoDelete.as_view(), name='curso_borrar'),
+    
+    path("entregable/list/", EntregableList.as_view(), name="entregable_list"),
+    path('entregable/nuevo/', EntregableCreacion.as_view(), name='entregable_crear'),
+    path('entregable/<pk>', EntregableDetalle.as_view(), name='entregable_detalle'),
+    path('entregable/editar/<pk>', EntregableUpdate.as_view(), name='entregable_editar'),
+    path('entregable/borrar/<pk>', EntregableDelete.as_view(), name='entregable_borrar'),
 
 
     path("login/", login_request, name="login"),

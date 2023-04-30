@@ -29,6 +29,8 @@ class Entregable(models.Model):
     nombre= models.CharField(max_length=50)
     fecha_entrega= models.DateField()
     entregado= models.BooleanField()
+    def __str__(self):
+        return f"{self.nombre} {self.fecha_entrega} {self.entregado}" 
 
 class Avatar(models.Model):
     imagen= models.ImageField(upload_to="avatars")
